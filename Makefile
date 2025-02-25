@@ -1,7 +1,16 @@
-.PHONY: all test run lint clean
+.PHONY: all test run lint clean install
 
 ### Default target(s)
 all: test run
+
+### Clean up generated files
+clean:
+	uv clean
+	rm -fr .ruff_cache .venv
+
+### Install this tool locally
+install:
+	uv tool install --upgrade .
 
 ### Perform static analysis
 lint:
@@ -15,13 +24,5 @@ run: lint
 
 ### Run unit tests
 test: lint
-	uv run pytest -s -vv
+	uv run pytest --suppress-no-test-exit-code -vv
 
-### Clean up generated files
-clean:
-	uv clean
-	rm -fr .ruff_cache .venv
-
-### Install this tool locally
-install:
-	uv tool install --upgrade .
