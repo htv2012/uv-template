@@ -169,3 +169,8 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# uv project
+etc/ipython/history.sqlite
+etc/ipython/log
+etc/ipython/pid
