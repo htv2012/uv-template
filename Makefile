@@ -18,6 +18,10 @@ lint:
 	uv tool run ruff format .
 	uv tool run ruff check . --fix
 
+### Open a Python shell
+py:
+	PYTHONSTARTUP= uv run ipython --profile-dir=./etc/ipython
+
 ### Run the project
 run: lint
 	PYTHONBREAKPOINT="pudb.set_trace" uv run xyz
