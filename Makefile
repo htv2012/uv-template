@@ -20,9 +20,9 @@ lint:
 
 ### Run the project
 run: lint
-	uv run xyz
+	PYTHONBREAKPOINT="pudb.set_trace" uv run xyz
 
 ### Run unit tests
 test: lint
-	uv run pytest --suppress-no-test-exit-code -vv
+	PYTHONBREAKPOINT="pudb.set_trace" uv run pytest -vv
 
