@@ -1,4 +1,12 @@
-.PHONY: all test run lint clean install
+.PHONY: \
+	all \
+	clean \
+	install \
+	lab \
+	lint \
+	py \
+	run \
+	test \
 
 ### Default target(s)
 all: test run
@@ -11,6 +19,10 @@ clean:
 ### Install this tool locally
 install:
 	uv tool install --upgrade .
+
+### Run Jupyter lab
+lab:
+	JUPYTER_CONFIG_DIR=etc uv run jupyter lab --notebook-dir=etc/notebooks
 
 ### Perform static analysis
 lint:
