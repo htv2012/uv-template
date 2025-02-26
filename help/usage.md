@@ -9,9 +9,12 @@ Follow this [procedure](https://docs.github.com/en/repositories/creating-and-man
 Once you cloned this template, the first step is to rename the
 project to reflect your purpose and to avoid name collision.
 
-1. Search for the word *xyz
-2. in all the files, except for file `uv.lock` and directory `help`.
-3. Replace *xyz with the name of your project
-4. Rename `src/xyz` to `src/<your project name>`, take care to use
+1. Search for the word *xyz in all the files, except for file `uv.lock` and directory `help`.
+3. Replace *xyz* with the name of your project
+4. Rename `src/xyz` to a new name, take care to use
    underscore instead of dashes. For example, if your project name is
    *foo-bar*, then the directory should be *foo_bar*
+
+Instead of performing the above steps, you can also issue the following command:
+
+    make rename

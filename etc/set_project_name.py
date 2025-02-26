@@ -1,22 +1,43 @@
 import pathlib
 import re
+import subprocess
+
+import tomllib
 
 
 def edit_file(filename: str, search: str, replace: str):
     file = pathlib.Path(filename)
     content = file.read_text()
     content = re.sub(rf"\b{search}\b", replace, content)
-    print(content)
     file.write_text(content)
 
 
-print("Changing project name from xyz to a new name")
-dash_name = input("New name: ")
-under_name = dash_name.replace("-", "_")
+def get_current_project_name() -> str:
+    with open("pyproject.toml", "rb") as stream:
+        info = tomllib.load(stream)
+    return info["project"]["name"]
 
-edit_file("pyproject.toml", "xyz", dash_name)
-edit_file("Makefile", "xyz", dash_name)
-edit_file("src/xyz/cli.py", "xyz", dash_name)
 
-package_dir = pathlib.Path("src/xyz")
-package_dir.rename(f"src/{under_name}")
+def main():
+    # Get old- and new names
+    old_name = get_current_project_name()
+    old_dir_name = old_name.replace("-", "_")
+
+    name = input("New name: ")
+    dir_name = name.replace("-", "_")
+
+    # Rename dir
+    package_dir = pathlib.Path(f"src/{old_dir_name}")
+    package_dir.rename(f"src/{dir_name}")
+
+    # Replace text
+    edit_file("pyproject.toml", f"{old_dir_name}:main", f"{dir_name}:main")
+    edit_file("pyproject.toml", old_name, name)
+    edit_file("Makefile", old_name, name)
+
+    # Update uv.lock file
+    subprocess.run(["uv", "sync"])
+
+
+if __name__ == "__main__":
+    main()
