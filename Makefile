@@ -36,7 +36,7 @@ py:
 	PYTHONSTARTUP= uv run ipython --profile-dir=./etc/ipython
 
 ### Rename the project
-name:
+rename:
 	uv run etc/set_project_name.py
 
 ### Run the project
