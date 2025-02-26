@@ -2,8 +2,7 @@
 
 ## Create a New Project Using This Template
 
-Follow this [procedure]
-(https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template)
+Follow this [procedure](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template)
 
 # Rename the Project
 
