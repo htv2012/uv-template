@@ -14,7 +14,7 @@ This document assumes you already created such a token from
 4. Under *Repository secrets*, select *New repository secret*
 5. In the *New secret* page, fill in the following:
    - Name = PYPI_API_TOKEN
-   - Secret = <Your token from PyPI>
+   - Secret = *Your token from PyPI*
 6. Click *Add secret*
 
 
