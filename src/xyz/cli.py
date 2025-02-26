@@ -1,2 +1,7 @@
+import click
+
+
+@click.command()
+@click.version_option()
 def main() -> None:
-    print("Hello from xyz!")
+    print("Hello world!")
