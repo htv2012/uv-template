@@ -31,12 +31,13 @@ jobs:
         allow-prereleases: true
 
     - name: Install Dev Tools
-      run: |
-        uv sync --dev
+      run: uv sync --dev
+
+    - name: Verify Code Formatted
+      run: uv run ruff format --check
 
     - name: Static Analysis
       run: uv run ruff check .
         
     - name: Run Tests
-      run: |
-        uv run pytest -vv
+      run: uv run pytest -vv
