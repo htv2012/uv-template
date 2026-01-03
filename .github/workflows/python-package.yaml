@@ -5,39 +5,55 @@ name: Python package
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["pypy3.9", "pypy3.10", "3.9", "3.10", "3.11", "3.12", "3.13", "3.14"]
+        python-version:
+          [
+            "pypy3.9",
+            "pypy3.10",
+            "pypy3.11",
+            "3.9",
+            "3.10",
+            "3.11",
+            "3.12",
+            "3.13",
+            "3.14",
+            "3.15",
+          ]
 
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - name: Install uv
-      uses: astral-sh/setup-uv@v5
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
 
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
-      with:
-        python-version: ${{ matrix.python-version }}
-        allow-prereleases: true
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          allow-prereleases: true
 
-    - name: Install Dev Tools
-      run: uv sync --dev
+      - name: Install Development Tools
+        run: uv sync --dev
 
-    - name: Verify Code Formatted
-      run: uv run ruff format --check
+      - name: Ensure Code Are Formatted
+        run: |
+          uv run ruff format --check
+          uv run ruff check --select I .
 
-    - name: Static Analysis
-      run: uv run ruff check .
-        
-    - name: Run Tests
-      run: uv run pytest -vv
+      - name: Static Analysis
+        run: |
+          uv run ruff check .
+          uv run ty check src tests
+
+      - name: Run Unit Tests
+        run: |
+          uv run pytest -v

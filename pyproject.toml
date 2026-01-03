@@ -14,16 +14,23 @@ dependencies = [
 [project.scripts]
 xyz = "xyz:main"
 
+
 [build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+requires = ["uv_build>=0.9.21,<0.10.0"]
+build-backend = "uv_build"
 
 [dependency-groups]
 dev = [
     "ipython>=8.32.0",
     "jupyterlab>=4.3.5",
     "pudb>=2024.1.3",
-    "pytest>=8.3.4",
+    "pytest>=8.3.5",
+    "pytest-cov>=6.1.1",
     "python-dotenv>=1.0.1",
-    "ruff>=0.9.7",
+    "ruff>=0.11.6",
+    "ty>=0.0.7",
 ]
+
+[tool.pytest.ini_options]
+addopts = "--cov"
+testpaths = ["test", "tests"]
